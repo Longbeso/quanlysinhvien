@@ -5,14 +5,28 @@ const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
 
 const registerAccount = async (req, res) => {
-  const { User } = DB;
-  const { firstName, lastName, email, passWord } = req.body;
+  const { User, Role } = DB;
+  const { userName, email, passWord } = req.body;
   // validate (email, passWord)
+
+  // kiểm tra xem db role có USER không
+  const defaultRole = await Role.findOne({
+    where: { name: "USER" },
+  });
+
+  // lỗi
+  if (!defaultRole) {
+    return res.status(500).json({
+      ErrorCode: -1,
+      ErrorMessage: "Role USER chưa được khởi tạo",
+    });
+  }
+
   if (!validateEmail(email)) {
     return res.json({
       success: false,
@@ -33,6 +47,14 @@ const registerAccount = async (req, res) => {
       ErrorMessage: "email đã tồn tại rồi bạn ơi",
     });
   }
+
+  // validate password
+  if (!passWord || passWord.length < 6) {
+    return res.json({
+      ErrorCode: -1,
+      ErrorMessage: "Password phải có ít nhất 6 ký tự",
+    });
+  }
   // hash password
 
   // thêm vào đb
@@ -49,13 +71,14 @@ const registerAccount = async (req, res) => {
   // });
   const hash = await bcrypt.hash(passWord, saltRounds);
   const newUser = await User.create({
-    firstName,
-    lastName,
-    email,
+    username: userName,
+    email: email,
+    role_id: defaultRole.id,
     password: hash,
   });
+
   return res.json({
-    DATA: newUser,
+    DATA: { username: userName, email: email, role: defaultRole.name },
     ErrorCode: 0,
     Message: "Tạo account thành công",
   });

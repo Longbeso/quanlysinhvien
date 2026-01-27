@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
       // verify => coi có hợp lệ không
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(decoded);
+        // console.log(decoded);
         next(); // token hợp lệ ==> pass
       } catch (err) {
         return res.status(401).json({ MS: "Token không hợp lệ/ hết hạn" });

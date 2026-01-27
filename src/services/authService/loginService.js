@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import bcrypt from "bcrypt";
 import DB from "../../models/index.cjs";
 import { AppError } from "../../ultils/appError.js";
@@ -21,7 +19,8 @@ const loginService = async ({ email, passWord }) => {
       name: user.username,
     };
     const access_token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRE,
+      // expiresIn: process.env.JWT_EXPIRE,
+      expiresIn: "1d",
     });
     return {
       EC: 0,

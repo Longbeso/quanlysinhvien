@@ -3,9 +3,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Students", {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+      },
       mssv: {
         type: Sequelize.STRING,
-        primaryKey: true,
         allowNull: false,
       },
 
@@ -13,21 +17,31 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
 
       class_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: {
+          model: "student_classes",
+          key: "id", // Primary key of main table
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT",
       },
 
-      // date_of_birth: {
-      //   type: Sequelize.DATEONLY,
-      //   allowNull: false,
-      // },
-
       gender: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.TINYINT, // 1=MALE, 2=FEMALE, 3=OTHER
+        allowNull: true,
       },
 
       phone: {

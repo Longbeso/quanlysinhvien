@@ -3,7 +3,15 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Student extends Model {
     static associate(models) {
-      // định nghĩa quan hệ sau
+      Student.belongsTo(models.User, {
+        foreignKey: "user_id",
+      });
+      Student.belongsTo(models.StudentClass, {
+        foreignKey: "class_id",
+      });
+      Student.hasMany(models.Enrollment, {
+        foreignKey: "student_id",
+      });
     }
   }
   Student.init(
@@ -25,13 +33,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      // date_of_birth: {
-      //   type: DataTypes.DATEONLY,
-      //   allowNull: false,
-      // },
-
       gender: {
-        type: DataTypes.STRING,
+        type: DataTypes.TINYINT, // 0: male, 1: female, 2: other
         allowNull: false,
       },
 
@@ -51,9 +54,9 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM("STUDYING", "PAUSED", "DROPPED"),
         allowNull: false,
-        defaultValue: "studying", // studying | paused | dropped
+        defaultValue: "STUDYING", // studying | paused | dropped
       },
       createdAt: {
         allowNull: false,

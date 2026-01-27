@@ -2,33 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("student_classes", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      username: {
-        allowNull: false,
-        defaultValue: "User",
+      name: {
         type: Sequelize.STRING,
-      },
-      email: {
         allowNull: false,
-        type: Sequelize.STRING,
         unique: true,
       },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      role_id: {
-        allowNull: false,
+      major_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "majors",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT",
       },
-      enable: {
-        type: Sequelize.BOOLEAN,
+      status: {
+        type: Sequelize.TINYINT, // 0: INACTIVE, 1: ACTIVE
+        defaultValue: "1",
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("student_classes");
   },
 };

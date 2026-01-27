@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "role_id",
         as: "role", // tên của quan hệ giữa user và role
       });
+      User.hasOne(models.Student, {
+        foreignKey: "user_id",
+      });
+      User.hasOne(models.Lecturer, {
+        foreignKey: "user_id",
+      });
     }
   }
 
@@ -56,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      tableName: "Users",
+      tableName: "users",
     },
   );
 

@@ -8,18 +8,23 @@ const validateEmail = (email) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
-const registerService = async ({ userName, email, passWord }) => {
-  const { User, Role } = DB;
+const registerService = async ({ userName, email, passWord, role }) => {
+  const { User, Role, Student } = DB;
   // validate (email, passWord)
 
   // kiểm tra xem db role có USER không
-  const defaultRole = await Role.findOne({
-    where: { name: "USER" },
-  });
 
-  // lỗi
-  if (!defaultRole) {
-    throw new Error("Role USER chưa được khởi tạo");
+  let role_id = 2;
+  if (role) {
+    const findRole = await Role.findOne({
+      where: { name: role },
+    });
+    if (!findRole) {
+      // lỗi
+      throw new Error("role không hợp lệ");
+    } else {
+      role_id = findRole?.id;
+    }
   }
 
   if (!validateEmail(email)) {
@@ -38,7 +43,7 @@ const registerService = async ({ userName, email, passWord }) => {
 
   // validate password
   if (!passWord || passWord.length < 6) {
-    throw new Error("Mật khẩu phải có ít 6 ký tự", 400);
+    throw new Error("Mật khẩu không hợp lệ", 400);
   }
 
   // hash password
@@ -49,11 +54,15 @@ const registerService = async ({ userName, email, passWord }) => {
   const newUser = await User.create({
     username: userName,
     email: email,
-    role_id: defaultRole.id,
+    role_id,
     password: hash,
   });
 
-  return { username: userName, email: email, role: defaultRole.name };
+  // const newUserRole = await Student.create({
+  //   mssv: "",
+  // });
+
+  return { username: userName, email: email, role: role };
 };
 
 export default registerService;

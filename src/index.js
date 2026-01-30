@@ -1,8 +1,8 @@
-import express from "express";
-const app = express();
-const port = 3000;
 import dotenv from "dotenv";
 dotenv.config();
+import express from "express";
+const app = express();
+const port = process.env.PORT;
 import ConnectDB from "./config/connectDB.js";
 import cors from "cors";
 import indexRouter from "./routes/index.route.js";

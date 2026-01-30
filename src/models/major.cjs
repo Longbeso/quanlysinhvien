@@ -32,6 +32,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+
+      // facultyId: {
+      //   type: DataTypes.INTEGER,
+      //   field: "faculty_id", // map DB
+      //   allowNull: false,
+      // },
+      required_credits: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       sequelize,

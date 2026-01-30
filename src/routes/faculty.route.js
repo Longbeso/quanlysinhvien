@@ -10,11 +10,13 @@ facultyRouter.post(
   facultyController.createFaculty,
 );
 facultyRouter.patch(
-  "/:code",
+  "/:id",
   upload.single("image"),
   facultyController.patchFaculty,
 );
 facultyRouter.get("/", facultyController.getAllFaculty);
+facultyRouter.get("/:id", facultyController.getFaculty);
 
 facultyRouter.delete("/:id", facultyController.deleteFaculty);
+
 export default facultyRouter;

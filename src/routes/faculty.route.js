@@ -12,10 +12,17 @@ facultyRouter.post(
 facultyRouter.patch(
   "/:id",
   upload.single("image"),
-  facultyController.patchFaculty,
+  facultyController.updateFaculty,
 );
 facultyRouter.get("/", facultyController.getAllFaculty);
 facultyRouter.get("/:id", facultyController.getFaculty);
+
+facultyRouter.delete("/", (req, res) => {
+  res.status(400).json({
+    success: false,
+    message: "Thiếu id khoa",
+  });
+});
 
 facultyRouter.delete("/:id", facultyController.deleteFaculty);
 

@@ -29,9 +29,11 @@ const createFaculty = async (name, imageUrl, publicId, code) => {
 };
 
 const updateFaculty = async (req) => {
-  const { id } = req.params;
-
-  const allowedFields = ["name", "status"];
+  const id = Number(req.params.id);
+  if (Number.isNaN(id)) {
+    throw new Error("id không hợp lệ");
+  }
+  const allowedFields = ["name", "status", "code"];
 
   const data = {};
   // nếu có ảnh mới
@@ -40,7 +42,15 @@ const updateFaculty = async (req) => {
     data.image_public_id = req.file.filename;
   }
   allowedFields.forEach((field) => {
-    if (req.body[field] !== undefined) {
+    if (
+      field === "status" &&
+      ![0, 1].includes(Number(req.body[field])) &&
+      req.body[field]
+    ) {
+      throw new Error("status không hợp lệ");
+    }
+
+    if (req.body[field] != null) {
       data[field] = req.body[field];
     }
   });
@@ -72,10 +82,21 @@ const updateFaculty = async (req) => {
   }
 };
 
-const deleteFaculty = async (id) => {
-  if (!id && id != 0) {
-    res.json("id không hợp lệ");
+const deleteFaculty = async (id_faculty) => {
+  const id = Number(id_faculty);
+  if (Number.isNaN(id)) {
+    throw new Error("id không hợp lệ");
   }
+
+  const countMajor = await DB.Major.count({ where: { faculty_id: id } });
+  const countLecturer = await DB.Lecturer.count({ where: { faculty_id: id } });
+
+  if (countMajor > 0 || countLecturer > 0) {
+    throw new Error(
+      "Vẫn còn ngành học hoặc giảng viên trong khoa, không thể xóa",
+    );
+  }
+
   const faculty = await DB.Faculty.findOne({ where: { id } });
   if (!faculty) {
     throw new Error("mã khoa không hợp lệ / không tồn tại");
@@ -97,15 +118,16 @@ const getAllFaculty = async () => {
     attributes: ["id", "name", "status", "img", "code"],
   });
 };
-const getFaculty = async (id) => {
-  if (!id) {
+const getFaculty = async (id_faculty) => {
+  const id = Number(id_faculty);
+  if (Number.isNaN(id)) {
     throw new Error("id không hợp lệ");
   }
 
   const faculty = await DB.Faculty.findOne({ where: { id } });
 
   if (!faculty) {
-    throw new Error("id không hợp lệ");
+    throw new Error("ngành học không tồn tại");
   }
 
   return {

@@ -31,7 +31,7 @@ const createFaculty = async (req, res, next) => {
 //   }
 // };
 
-const patchFaculty = async (req, res) => {
+const updateFaculty = async (req, res) => {
   try {
     const faculty = await facultyService.updateFaculty(req);
     return res.status(200).json({
@@ -51,9 +51,10 @@ const deleteFaculty = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await facultyService.deleteFaculty(id);
-    console.log("file facultyController >>>", result);
-    res.json({ MS: "Xóa thành công" });
-  } catch (err) {}
+    res.status(200).json({ Success: true, MS: "Xóa thành công" });
+  } catch (err) {
+    res.status(400).json({ Success: false, MS: err.message });
+  }
 };
 
 const getAllFaculty = async (req, res) => {
@@ -76,7 +77,7 @@ const getFaculty = async (req, res) => {
 
 export default {
   createFaculty,
-  patchFaculty,
+  updateFaculty,
   getAllFaculty,
   deleteFaculty,
   getFaculty,

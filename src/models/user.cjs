@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Student, {
         foreignKey: "user_id",
       });
+      User.hasOne(models.Refresh_token, {
+        foreignKey: "user_id",
+      });
       User.hasOne(models.Lecturer, {
         foreignKey: "user_id",
       });

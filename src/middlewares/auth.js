@@ -13,11 +13,11 @@ const auth = (req, res, next) => {
       const token = req.headers.authorization.split(" ")[1]; // lấy access_token
       // verify => coi có hợp lệ không
       try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
         // console.log(decoded);
         next(); // token hợp lệ ==> pass
       } catch (err) {
-        return res.status(401).json({ MS: "Token không hợp lệ/ hết hạn" });
+        return res.status(401).json({ EC: 1, MS: err.message });
       }
     } else {
       return res

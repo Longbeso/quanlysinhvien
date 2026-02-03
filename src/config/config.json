@@ -1,23 +1,32 @@
 {
   "development": {
     "username": "root",
-    "password": "Long2006@",
-    "database": "quanlysinhvienctu",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "password": "GjOEFgHsOIfjRWvhJbNwQcpVprgeJkbL",
+    "database": "railway",
+    "host": "caboose.proxy.rlwy.net",
+    "port": 35292,
+    "dialect": "mysql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "logging": true
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "password": "GjOEFgHsOIfjRWvhJbNwQcpVprgeJkbL",
+    "database": "railway",
+    "host": "caboose.proxy.rlwy.net",
+    "port": 35292,
+    "dialect": "mysql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "logging": false
   }
 }

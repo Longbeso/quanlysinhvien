@@ -1,17 +1,7 @@
 {
   "development": {
-    "username": "quanlysinhvienctu_user",
-    "password": "u2Auka9gOsBwLIqX14LyqSnDXo6nbZsK",
-    "database": "quanlysinhvienctu",
-    "host": "dpg-d610upchg0os73cvfb5g-a.singapore-postgres.render.com",
-    "dialect": "postgres",
-    "port": 5432,
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "url": "process.env.DATABASE_URL",
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",
@@ -21,10 +11,13 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

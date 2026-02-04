@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
   const white_lists = ["/", "/auth/register", "/auth/login"];
   // const url = req.url;
   const url = req.originalUrl;
-  if (white_lists.find((item) => "/v1/api" + item === url)) {
+  if (white_lists.find((item) => "v1/api" + item === url)) {
     next();
   } else {
     if (req?.headers?.authorization?.split(" ")?.[1]) {

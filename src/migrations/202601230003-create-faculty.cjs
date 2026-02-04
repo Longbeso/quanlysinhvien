@@ -20,7 +20,7 @@ module.exports = {
         allowNull: true,
       },
       status: {
-        type: Sequelize.TINYINT, // 1: ACTIVE, 0: INACTIVE
+        type: Sequelize.SMALLINT, // 1: ACTIVE, 0: INACTIVE
         allowNull: false,
         defaultValue: 1, // ACTIVE
       },

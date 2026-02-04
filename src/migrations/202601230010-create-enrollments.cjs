@@ -39,7 +39,7 @@ module.exports = {
       },
 
       status: {
-        type: Sequelize.TINYINT,
+        type: Sequelize.SMALLINT,
         allowNull: false,
         defaultValue: 1, // 1 enrolled | 0 dropped | 2 completed
       },

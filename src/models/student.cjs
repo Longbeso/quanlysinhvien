@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       gender: {
-        type: DataTypes.TINYINT, // 0: male, 1: female, 2: other
+        type: DataTypes.SMALLINT, // 0: male, 1: female, 2: other
         allowNull: false,
       },
 

@@ -25,7 +25,7 @@ module.exports = {
         onDelete: "RESTRICT",
       },
       status: {
-        type: Sequelize.TINYINT, // 0: INACTIVE, 1: ACTIVE
+        type: Sequelize.SMALLINT, // 0: INACTIVE, 1: ACTIVE
         defaultValue: "1",
       },
       createdAt: {

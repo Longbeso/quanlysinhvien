@@ -7,10 +7,13 @@ import studentClassRouter from "./studentClass.route.js";
 // import  from "./student.route.js";
 import majorRouter from "./student.route.js";
 import studentRouter from "./student.route.js";
+
+import verifyToken from "../middlewares/verifyToken.js";
+import allowRoles from "../middlewares/allowRoles.js";
 const indexRouter = (app) => {
-  app.use(auth);
+  app.use(auth, verifyToken);
   app.use("/v1/api/auth", authRouter);
-  app.use("/v1/api/faculty", facultyRouter);
+  app.use("/v1/api/faculty", allowRoles(1), facultyRouter);
   app.use("/v1/api/major", majorRouter);
   app.use("/v1/api/studentClass", studentClassRouter);
   app.use("/v1/api/student", studentRouter);

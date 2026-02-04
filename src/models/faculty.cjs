@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       status: {
-        type: DataTypes.TINYINT, // 1: ACTIVE, 0: INACTIVE
+        type: DataTypes.SMALLINT, // 1: ACTIVE, 0: INACTIVE
         allowNull: false,
       },
       img: {

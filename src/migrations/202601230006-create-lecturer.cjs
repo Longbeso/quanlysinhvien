@@ -33,7 +33,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       gender: {
-        type: Sequelize.TINYINT, // 1=MALE, 2=FEMALE, 3=OTHER
+        type: Sequelize.SMALLINT, // 1=MALE, 2=FEMALE, 3=OTHER
         allowNull: true,
       },
       phone: {

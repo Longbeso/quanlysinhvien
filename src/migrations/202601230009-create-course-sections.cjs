@@ -58,7 +58,7 @@ module.exports = {
         defaultValue: 0,
       },
       status: {
-        type: Sequelize.TINYINT,
+        type: Sequelize.SMALLINT,
         allowNull: false,
         defaultValue: 1, // 0: CLOSED, 1: OPEN, 2: CANCELLED
       },

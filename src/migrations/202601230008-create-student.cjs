@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Students", {
+    await queryInterface.createTable("students", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -40,7 +40,7 @@ module.exports = {
       },
 
       gender: {
-        type: Sequelize.TINYINT, // 1=MALE, 2=FEMALE, 3=OTHER
+        type: Sequelize.SMALLINT, // 1=MALE, 2=FEMALE, 3=OTHER
         allowNull: true,
       },
 

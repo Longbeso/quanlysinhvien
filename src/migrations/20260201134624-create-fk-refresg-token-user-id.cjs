@@ -11,7 +11,6 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: "users",
           key: "id",
@@ -41,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("refresh_tokenss");
+    await queryInterface.dropTable("refresh_tokens");
   },
 };

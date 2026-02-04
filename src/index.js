@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // connect to db
-ConnectDB();
+// ConnectDB.ConnectDB_mySQL();
+ConnectDB.connectPostgreSQL();
 indexRouter(app);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

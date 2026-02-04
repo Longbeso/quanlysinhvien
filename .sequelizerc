@@ -1,6 +1,7 @@
 // .sequelizerc (ở thư mục gốc project)
 const path = require("path");
-
+const dotenv = require("dotenv");
+dotenv.config();
 module.exports = {
   config: path.resolve("src", "config", "config.json"),
   "models-path": path.resolve("src", "models"),
@@ -26,3 +27,5 @@ module.exports = {
 // //   migrationsPath: path.resolve("migrations"),
 // //   seedersPath: path.resolve("seeders"),
 // // };
+
+// tạo migration trên render bằng lệnh -== tiếp tục ở đây

@@ -1,32 +1,30 @@
 {
   "development": {
-    "username": "root",
-    "password": "GjOEFgHsOIfjRWvhJbNwQcpVprgeJkbL",
-    "database": "railway",
-    "host": "caboose.proxy.rlwy.net",
-    "port": 35292,
-    "dialect": "mysql",
+    "username": "quanlysinhvienctu_user",
+    "password": "u2Auka9gOsBwLIqX14LyqSnDXo6nbZsK",
+    "database": "quanlysinhvienctu",
+    "host": "dpg-d610upchg0os73cvfb5g-a.singapore-postgres.render.com",
+    "dialect": "postgres",
+    "port": 5432,
     "dialectOptions": {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false
       }
-    },
-    "logging": true
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "GjOEFgHsOIfjRWvhJbNwQcpVprgeJkbL",
-    "database": "railway",
-    "host": "caboose.proxy.rlwy.net",
-    "port": 35292,
-    "dialect": "mysql",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    },
-    "logging": false
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }

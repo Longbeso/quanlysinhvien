@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 0,
       },
       status: {
-        type: DataTypes.TINYINT,
+        type: DataTypes.SMALLINT,
         allowNull: false,
         defaultValue: 1, // 0: CLOSED, 1: OPEN, 2: CANCELLED
       },

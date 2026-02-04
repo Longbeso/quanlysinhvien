@@ -11,7 +11,7 @@ import studentRouter from "./student.route.js";
 import verifyToken from "../middlewares/verifyToken.js";
 import allowRoles from "../middlewares/allowRoles.js";
 const indexRouter = (app) => {
-  app.use(auth, verifyToken);
+  app.use(auth);
   app.use("/v1/api/auth", authRouter);
   app.use("/v1/api/faculty", allowRoles(1), facultyRouter);
   app.use("/v1/api/major", majorRouter);

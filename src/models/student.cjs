@@ -54,9 +54,9 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       status: {
-        type: DataTypes.ENUM("STUDYING", "PAUSED", "DROPPED"),
+        type: DataTypes.SMALLINT,
         allowNull: false,
-        defaultValue: "STUDYING", // studying | paused | dropped
+        defaultValue: "1", // 1 studying | 2 deferred (bảo lưu) | 3 Graduated / 0 dismissed (bị đuổi)
       },
       createdAt: {
         allowNull: false,

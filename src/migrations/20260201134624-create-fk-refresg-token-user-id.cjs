@@ -6,6 +6,7 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
 
       user_id: {
@@ -22,7 +23,6 @@ module.exports = {
       token: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
 
       expires_at: {

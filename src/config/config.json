@@ -1,7 +1,10 @@
 {
   "development": {
-    "url": "process.env.DATABASE_URL",
-    "dialect": "postgres"
+    "username": "root",
+    "password": "Long2006@",
+    "database": "quanlysinhvienctu",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

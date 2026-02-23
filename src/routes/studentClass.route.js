@@ -4,9 +4,9 @@ const studentClassRouter = express.Router();
 import studentClassController from "../controller/studentClassController.js";
 
 studentClassRouter.post("/", studentClassController.createStudentClass);
-// studentClassRouter.get("/", studentClassController.getAllStudentClasss);
-// studentClassRouter.get("/:id", studentClassController.getStudentClass);
-// studentClassRouter.patch("/:id", studentClassController.updataStudentClass);
-// studentClassRouter.delete("/:id", studentClassController.deleteStudentClasss);
+studentClassRouter.get("/", studentClassController.getAllStudentClass);
+studentClassRouter.get("/:id", studentClassController.getStudentClass);
+studentClassRouter.patch("/:id", studentClassController.updataStudentClass);
+studentClassRouter.delete("/:id", studentClassController.deleteStudentClass);
 
 export default studentClassRouter;

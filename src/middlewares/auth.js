@@ -3,10 +3,17 @@ dotenv.config();
 
 import jwt from "jsonwebtoken";
 const auth = (req, res, next) => {
-  const white_lists = ["/", "/auth/register", "/auth/login"];
+  const white_lists = [
+    "/",
+    "/auth/register",
+    "/auth/login",
+    "/auth/refreshToken",
+  ];
   // const url = req.url;
   const url = req.originalUrl;
-  if (white_lists.find((item) => "v1/api" + item === url)) {
+  // /v1/api khi code local
+  // v1/api khi db nằm trên webserver
+  if (white_lists.find((item) => "/v1/api" + item === url)) {
     next();
   } else {
     if (req?.headers?.authorization?.split(" ")?.[1]) {

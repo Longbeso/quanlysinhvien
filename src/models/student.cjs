@@ -16,9 +16,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Student.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       mssv: {
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false,
       },
 
@@ -70,6 +74,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Student",
+      paranoid: true,
     },
   );
   return Student;

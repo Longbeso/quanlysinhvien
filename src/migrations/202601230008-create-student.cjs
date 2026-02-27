@@ -7,6 +7,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
+        autoIncrement: true,
       },
       mssv: {
         type: Sequelize.STRING,
@@ -28,9 +29,6 @@ module.exports = {
       class_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
         references: {
           model: "student_classes",
           key: "id", // Primary key of main table
@@ -75,6 +73,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Students");
+    await queryInterface.dropTable("students");
   },
 };

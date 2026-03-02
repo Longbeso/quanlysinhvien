@@ -17,8 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // connect to db
-ConnectDB.ConnectDB_mySQL();
-// ConnectDB.connectPostgreSQL();
+// ConnectDB.ConnectDB_mySQL();
+ConnectDB.connectPostgreSQL();
+
 indexRouter(app);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

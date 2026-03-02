@@ -58,9 +58,9 @@ module.exports = {
       },
 
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.SMALLINT,
         allowNull: false,
-        defaultValue: "studying", // studying | paused | dropped
+        defaultValue: 1, // studying | paused | dropped
       },
       createdAt: {
         allowNull: false,

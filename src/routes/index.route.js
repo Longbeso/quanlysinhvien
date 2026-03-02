@@ -15,7 +15,8 @@ import refreshTokenController from "../controller/auth/refreshTokenController.js
 const indexRouter = (app) => {
   app.use(auth);
   app.use("/v1/api/auth", authRouter);
-  app.use("/v1/api/faculty", verifyToken, allowRoles("ADMIN"), facultyRouter);
+  // allowRoles("ADMIN"),
+  app.use("/v1/api/faculty", verifyToken, allowRoles(1), facultyRouter);
   app.use("/v1/api/major", majorRouter);
   app.use("/v1/api/studentClass", studentClassRouter);
   app.use("/v1/api/student", studentRouter);

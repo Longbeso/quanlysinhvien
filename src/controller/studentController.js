@@ -50,7 +50,10 @@ const createStudent = async (req, res) => {
 const getAllStudent = async (req, res) => {
   try {
     const allStudent = await studentService.getAllStudent();
-    res.status(200).json({ Success: true, DT: allStudent });
+    res.status(200).json({
+      Success: true,
+      DT: { quantity: allStudent.length, listStudent: allStudent },
+    });
   } catch (err) {
     res.status(400).json({ Success: false, MS: err.message });
   }

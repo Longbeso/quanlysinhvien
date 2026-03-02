@@ -60,7 +60,12 @@ const deleteFaculty = async (req, res) => {
 const getAllFaculty = async (req, res) => {
   try {
     const data = await facultyService.getAllFaculty();
-    return res.status(200).json({ success: true, DT: data });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        DT: { quantity: data.length, listFaculty: data },
+      });
   } catch (err) {
     return res.status(400).json({ Success: false, MS: err.message });
   }

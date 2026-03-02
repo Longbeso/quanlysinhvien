@@ -62,7 +62,9 @@ const createMajor = async (req, res) => {
 const getAllMajor = async (req, res) => {
   try {
     const listMajor = await majorService.getAllMajor();
-    res.status(200).json({ Success: true, Data: listMajor });
+    res
+      .status(200)
+      .json({ Success: true, Data: { quantity: listMajor.length, listMajor } });
   } catch (err) {
     (400).json({ Success: false, MS: err.message });
   }

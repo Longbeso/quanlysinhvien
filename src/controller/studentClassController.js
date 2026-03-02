@@ -27,7 +27,12 @@ const createStudentClass = async (req, res) => {
 
 const getAllStudentClass = async (req, res) => {
   const listStudentClass = await studentClassService.getAllClassStudent();
-  res.status(200).json({ Success: true, Data: listStudentClass });
+  res
+    .status(200)
+    .json({
+      Success: true,
+      Data: { quantity: listStudentClass.length, listStudentClass },
+    });
 };
 
 const getStudentClass = async (req, res) => {

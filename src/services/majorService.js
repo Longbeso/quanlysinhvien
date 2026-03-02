@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import DB from "../models/index.cjs";
 
 const createMajor = async (name, faculty_id, required_credits, code) => {

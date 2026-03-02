@@ -114,9 +114,12 @@ const deleteFaculty = async (id_faculty) => {
 };
 
 const getAllFaculty = async () => {
-  return await DB.Faculty.findAll({
+  const listGetAllFaculty = await DB.Faculty.findAll({
     attributes: ["id", "name", "status", "img", "code"],
   });
+
+  console.log("test data >>>>>>", listGetAllFaculty.length);
+  return listGetAllFaculty;
 };
 const getFaculty = async (id_faculty) => {
   const id = Number(id_faculty);

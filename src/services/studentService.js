@@ -3,9 +3,8 @@ import DB from "../models/index.cjs";
 import registerService from "./authService/registerService.js";
 const createStudent = async (data) => {
   // const user = await DB.User.create({});
-  const { email, passWord, role, userName, mssv, class_id, gender } = data;
+  const { email, passWord, userName, mssv, class_id, gender } = data;
   const currentYear = new Date().getFullYear();
-
   const isConstainClass = await DB.StudentClass.findByPk(class_id);
 
   if (!isConstainClass) {
@@ -19,7 +18,12 @@ const createStudent = async (data) => {
     throw new Error("Mssv đã tồn tại");
   }
 
-  const user = await registerService({ email, passWord, role, userName });
+  const user = await registerService({
+    email,
+    passWord,
+    role: "STUDENT",
+    userName,
+  });
 
   let student;
 

@@ -85,5 +85,25 @@ const deleteStudent = async (req, res) => {
   }
 };
 
-export default { createStudent, getAllStudent, getStudent, deleteStudent };
+const getStudentDeleted = async (req, res) => {
+  try {
+    const listStudentDeleted = await studentService.getStudentDeleted();
+    res
+      .status(200)
+      .json({
+        Success: true,
+        DT: { quantity: listStudentDeleted.length, listStudentDeleted },
+      });
+  } catch (err) {
+    return res.status(400).json({ Success: false, MS: err.message });
+  }
+};
+
+export default {
+  createStudent,
+  getAllStudent,
+  getStudent,
+  deleteStudent,
+  getStudentDeleted,
+};
 // here

@@ -106,7 +106,7 @@ const getStudent = async (id) => {
     username: user.username,
     email: user.email,
     mssv: student.mssv,
-    role: role_user.name,
+    role: "STUDENT",
     class_id: student.class_id,
     gender: student.gender == 1 ? "Nam" : "Nữ",
     phone: student.phone,
@@ -118,8 +118,35 @@ const getStudent = async (id) => {
 
 // not completed
 const getStudentDeleted = async () => {
-  const allStudent = await DB.Student.findAll({ paranoid: false });
-  return allStudent;
+  const statusExplain = [
+    "Buộc thôi học",
+    "Đang học",
+    "Bảo lưu",
+    "Đã tốt nghiệp",
+  ];
+  const allStudentDeleted = await DB.Student.findAll({ paranoid: false });
+
+  const listStudentDeleted = await Promise.all(
+    allStudentDeleted.map(async (student) => {
+      const user = DB.User.findOne({ where: { id: student.user_id } });
+
+      return {
+        id: student.id,
+        enable: user.enable,
+        username: user.username,
+        email: user.email,
+        mssv: student.mssv,
+        role: "STUDENT",
+        class_id: student.class_id,
+        gender: student.gender == 1 ? "Nam" : "Nữ",
+        phone: student.phone,
+        address: student.address,
+        enroll_year: student.enroll_year,
+        status: statusExplain[student.status],
+      };
+    }),
+  );
+  return listStudentDeleted;
 };
 
 // soft delete
@@ -139,4 +166,10 @@ const updateStudent = async (dataUpdata) => {
   const allowdataUpdate = [];
 };
 
-export default { createStudent, getAllStudent, getStudent, deleteStudent };
+export default {
+  createStudent,
+  getAllStudent,
+  getStudent,
+  deleteStudent,
+  getStudentDeleted,
+};

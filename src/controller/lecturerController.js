@@ -44,7 +44,37 @@ const createLecturer = async (req, res) => {
   }
 };
 
-const updateLecturer = async (req, res) => {};
+const updateLecturer = async (req, res) => {
+  try {
+    const { phone, userName } = req.body;
+    const id = Number(req.params?.id);
+    let data = {};
+    if (isNaN(id)) {
+      throw new Error("id không hợp lệ");
+    }
+
+    data.id = id;
+
+    if (phone) {
+      const phoneRegex = /^0\d{9}$/;
+      const isValidPhone = phoneRegex.test(phone);
+      if (!isValidPhone) {
+        throw new Error("phone không hợp lệ !!!");
+      }
+      data.phone = phone;
+    }
+
+    if (userName) {
+      data.userName = userName;
+    }
+
+    const updateResult = await lecturerService.updateLecturer(data);
+
+    res.status(200).json({ Success: updateResult, MS: "Cập nhật thành công" });
+  } catch (err) {
+    res.status(400).json({ Success: false, MS: err.message });
+  }
+};
 
 const deleteLecturer = async (req, res) => {
   try {

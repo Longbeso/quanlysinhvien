@@ -31,20 +31,12 @@ const createMajor = async (req, res) => {
       throw new Error("Mã không được để trống");
     }
 
-    if (Number.isNaN(faculty_id)) {
-      throw new Error("faculty_id phải là số");
+    if (Number.isNaN(faculty_id) || !Number.isInteger(faculty_id)) {
+      throw new Error("faculty_id không hợp lệ");
     }
 
-    if (!Number.isInteger(faculty_id)) {
-      throw new Error("faculty_id phải là số nguyên");
-    }
-
-    if (Number.isNaN(required_credits)) {
-      throw new Error("required_credits phải là số");
-    }
-
-    if (!Number.isInteger(required_credits)) {
-      throw new Error("required_credits phải là số nguyên");
+    if (Number.isNaN(required_credits) || !Number.isInteger(required_credits)) {
+      throw new Error("required_credits không hợp lệ");
     }
 
     const major = await majorService.createMajor(

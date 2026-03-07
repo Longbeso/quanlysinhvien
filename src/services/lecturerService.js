@@ -101,4 +101,56 @@ const deleteLecturer = async (id) => {
   return resultDelete;
 };
 
-export default { createLecturer, getAllLecturer, getLecturer, deleteLecturer };
+// const updateLecturer = async (data) => {
+//   const { phone, userName, id } = data;
+
+//   const lecturer = await DB.Lecturer.findOne({ where: { id } });
+
+//   let user;
+
+//   if (lecturer) {
+//     user = await DB.User.findOne({ where: { id: lecturer.user_id } });
+//     await lecturer.update({ phone });
+//   } else {
+//     throw new Error("lecturer không tồn tại");
+//   }
+
+//   if (user) {
+//     await user.update({ username: userName });
+//   } else {
+//     throw new Error("User không tồn tại");
+//   }
+
+//   return "Update thành công";
+// };
+
+const updateLecturer = async (data) => {
+  const { phone, userName, id } = data;
+
+  const lecturer = await DB.Lecturer.findOne({ where: { id } });
+
+  if (!lecturer) {
+    throw new Error("Lecturer không tồn tại");
+  }
+
+  const user = await DB.User.findOne({
+    where: { id: lecturer.user_id },
+  });
+
+  if (!user) {
+    throw new Error("User không tồn tại");
+  }
+
+  await lecturer.update({ phone });
+  await user.update({ username: userName });
+
+  return true;
+};
+
+export default {
+  createLecturer,
+  getAllLecturer,
+  getLecturer,
+  deleteLecturer,
+  updateLecturer,
+};

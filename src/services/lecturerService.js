@@ -2,10 +2,18 @@ import DB from "../models/index.cjs";
 import registerService from "./authService/registerService.js";
 
 const createLecturer = async (data) => {
-  const { email, passWord, userName, faculty_id, gender, phone } = data;
+  const { email, passWord, userName, faculty_id, phone } = data;
+  let { gender } = data;
   const isContainFaculty = await DB.Faculty.findOne({
     where: { id: faculty_id },
   });
+
+  if (gender !== "Nam" && gender !== "Nu") {
+    throw new Error("gender phải là Nam hoặc Nu");
+  } else {
+    gender = gender === "Nam" ? 1 : 0;
+  }
+
   if (!isContainFaculty) {
     throw new Error("id khoa không hợp lệ");
   }

@@ -66,6 +66,7 @@ const getStudentClass = async (id) => {
     status: studentClass.status,
   };
 };
+
 const updataStudentClass = async ({ id, ...data }) => {
   const studentClass = await DB.StudentClass.findByPk(id);
 

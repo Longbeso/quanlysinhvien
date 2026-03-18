@@ -7,6 +7,16 @@ module.exports = (sequelize, DataTypes) => {
       Subject.hasMany(models.CourseSection, {
         foreignKey: "subject_id",
       });
+
+      Subject.hasMany(models.SubjectPrerequisite, {
+        foreignKey: "subject_id",
+        as: "prerequisites",
+      });
+
+      Subject.hasMany(models.SubjectPrerequisite, {
+        foreignKey: "prerequisite_subject_id",
+        as: "requiredFor",
+      });
     }
   }
 

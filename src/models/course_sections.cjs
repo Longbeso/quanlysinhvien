@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       CourseSection.belongsTo(models.Lecturer, {
         foreignKey: "lecturer_id",
       });
+      CourseSection.belongsTo(models.Room, {
+        foreignKey: "room_id",
+      });
 
       CourseSection.hasMany(models.Enrollment, {
         foreignKey: "course_section_id",
@@ -27,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      room_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
       },
 
       subject_id: {

@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: true,
       },
     },
-    { paranoid: true, sequelize, modelName: "User", tableName: "users" },
+    { sequelize, modelName: "User", tableName: "users" },
   );
 
   return User;

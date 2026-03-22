@@ -51,16 +51,49 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
+      // ngay hoc trong tuan 1-->7 <==> thứ 2 ---> chủ nhật
+      day_of_week: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+
+      // thời gian bắt đầu buổi học
+      start_time: {
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
+
+      // thời gian kết thúc buỗi học
+      end_time: {
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
+
+      // thời gian bắt đầu khóa học
+      start_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+
+      // thời gian kết thúc khóa học
+      end_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+
+      // kỳ học
       semester: {
         type: DataTypes.STRING,
         allowNull: false,
       },
 
+      // năm học
       school_year: {
         type: DataTypes.STRING,
         allowNull: false,
       },
 
+      // số học sinh tối đa
       max_student: {
         type: DataTypes.INTEGER,
         allowNull: false,

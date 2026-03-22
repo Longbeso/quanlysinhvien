@@ -3,22 +3,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("course_sessions", "day_of_week", {
+    await queryInterface.addColumn("course_sections", "day_of_week", {
       type: Sequelize.INTEGER,
       allowNull: false,
     });
 
-    await queryInterface.addColumn("course_sessions", "start_time", {
+    await queryInterface.addColumn("course_sections", "start_time", {
       type: Sequelize.TIME,
       allowNull: false,
     });
 
-    await queryInterface.addColumn("course_sessions", "end_time", {
+    await queryInterface.addColumn("course_sections", "end_time", {
       type: Sequelize.TIME,
       allowNull: false,
     });
 
-    await queryInterface.addColumn("course_sessions", "room_id", {
+    await queryInterface.addColumn("course_sections", "room_id", {
       type: Sequelize.INTEGER,
       allowNull: true,
       references: {
@@ -31,12 +31,12 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.removeColumn("course_sessions", "day_of_week");
+    await queryInterface.removeColumn("course_sections", "day_of_week");
 
-    await queryInterface.removeColumn("course_sessions", "start_time");
+    await queryInterface.removeColumn("course_sections", "start_time");
 
-    await queryInterface.removeColumn("course_sessions", "end_time");
+    await queryInterface.removeColumn("course_sections", "end_time");
 
-    await queryInterface.removeColumn("course_sessions", "room_id");
+    await queryInterface.removeColumn("course_sections", "room_id");
   },
 };

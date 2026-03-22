@@ -50,11 +50,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
     },
-    {
-      sequelize,
-      modelName: "Faculty",
-      tableName: "faculties",
-    },
+    { sequelize, modelName: "Faculty", tableName: "faculties" },
   );
   return Faculty;
 };

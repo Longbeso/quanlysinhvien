@@ -6,12 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Room.hasMany(models.CourseSection, {
         foreignKey: "room_id",
-        as: "roomToCourseSection",
       });
 
       Room.belongsTo(models.Faculty, {
         foreignKey: "faculty_id",
-        as: "roomToFaculty",
       });
     }
   }
@@ -21,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       faculty_id: {
         type: DataTypes.INTEGER,
@@ -32,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      paranoid: true,
       sequelize,
       modelName: "Room",
       tableName: "rooms",

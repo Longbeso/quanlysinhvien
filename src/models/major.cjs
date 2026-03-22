@@ -47,11 +47,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     },
-    {
-      sequelize,
-      modelName: "Major",
-      tableName: "majors",
-    },
+    { sequelize, modelName: "Major", tableName: "majors" },
   );
   return Major;
 };

@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      paranoid: true,
       sequelize,
       modelName: "Lecturer",
       tableName: "lecturers",

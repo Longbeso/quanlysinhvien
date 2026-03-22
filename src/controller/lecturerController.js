@@ -112,7 +112,7 @@ const getLecturer = async (req, res) => {
     if (isNaN(Number(id))) {
       throw new Error("id không hợp lệ");
     }
-    const lecturer = await lecturerService.deleteLecturer(id);
+    const lecturer = await lecturerService.getLecturer(id);
 
     return res.status(200).json({ Success: true, DATA: lecturer });
   } catch (err) {

@@ -11,6 +11,7 @@ import lecturerRouter from "./lecturer.route.js";
 import verifyToken from "../middlewares/verifyToken.js";
 import allowRoles from "../middlewares/allowRoles.js";
 import long from "../routes/long.route.js";
+import roomRouter from "./room.route.js";
 import refreshTokenController from "../controller/auth/refreshTokenController.js";
 
 const indexRouter = (app) => {
@@ -27,6 +28,7 @@ const indexRouter = (app) => {
   );
   app.use("/v1/api/student", verifyToken, allowRoles(1), studentRouter);
   app.use("/v1/api/lecturer", verifyToken, allowRoles(1), lecturerRouter);
+  app.use("/v1/api/room", verifyToken, allowRoles(1), roomRouter);
   app.use("/v1/api/user", long);
   // app.use("/v1/api/studentClass", studentClassRouter);
   //   app.use("/v1/api/", auth);

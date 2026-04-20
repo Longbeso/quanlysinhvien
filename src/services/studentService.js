@@ -162,8 +162,27 @@ const deleteStudent = async (id) => {
   return resultDelete;
 };
 
-const updateStudent = async (dataUpdata) => {
-  const allowdataUpdate = [];
+const updateStudent = async (data) => {
+  const { phone, userName, id, address } = data;
+
+  const student = await DB.Student.findOne({ where: { id } });
+
+  if (!student) {
+    throw new Error("student không tồn tại");
+  }
+
+  const user = await DB.User.findOne({
+    where: { id: student.user_id },
+  });
+
+  if (!user) {
+    throw new Error("User không tồn tại");
+  }
+
+  await student.update({ phone, address });
+  await user.update({ username: userName });
+
+  return true;
 };
 
 export default {
@@ -172,4 +191,5 @@ export default {
   getStudent,
   deleteStudent,
   getStudentDeleted,
+  updateStudent,
 };

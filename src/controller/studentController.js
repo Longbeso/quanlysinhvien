@@ -88,14 +88,45 @@ const deleteStudent = async (req, res) => {
 const getStudentDeleted = async (req, res) => {
   try {
     const listStudentDeleted = await studentService.getStudentDeleted();
-    res
-      .status(200)
-      .json({
-        Success: true,
-        DT: { quantity: listStudentDeleted.length, listStudentDeleted },
-      });
+    res.status(200).json({
+      Success: true,
+      DT: { quantity: listStudentDeleted.length, listStudentDeleted },
+    });
   } catch (err) {
     return res.status(400).json({ Success: false, MS: err.message });
+  }
+};
+
+const updateStudent = async (req, res) => {
+  try {
+    const { phone, userName, address } = req.body;
+    const id = Number(req.params?.id);
+    let data = {};
+    if (isNaN(id)) {
+      throw new Error("id không hợp lệ");
+    }
+
+    data.id = id;
+
+    if (phone) {
+      const phoneRegex = /^0\d{9}$/;
+      const isValidPhone = phoneRegex.test(phone);
+      if (!isValidPhone) {
+        throw new Error("phone không hợp lệ !!!");
+      }
+      data.phone = phone;
+    }
+
+    if (userName) {
+      data.userName = userName;
+    }
+    if (address) {
+      data.address = address;
+    }
+    const updateResult = await lecturerService.updateLecturer(data);
+    res.status(200).json({ Success: updateResult, MS: "Cập nhật thành công" });
+  } catch (err) {
+    res.status(400).json({ Success: false, MS: err.message });
   }
 };
 
@@ -105,5 +136,6 @@ export default {
   getStudent,
   deleteStudent,
   getStudentDeleted,
+  updateStudent,
 };
 // here

@@ -32,16 +32,7 @@ const sequelize_Post = new Sequelize(process.env.DATABASE_URL, {
     },
   },
 });
-// const sequelize_Post = new Sequelize(
-//   process.env.database,
-//   process.env.user,
-//   process.env.password,
-//   {
-//     host: process.env.host,
-//     port: process.env.port,
-//     dialect: "postgres",
-//   },
-// );
+
 // Hàm kết nối
 const connectPostgreSQL = async () => {
   try {

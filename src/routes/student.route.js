@@ -7,5 +7,6 @@ studentRouter.get("/deleted", studentController.getStudentDeleted);
 studentRouter.get("/:id", studentController.getStudent);
 studentRouter.get("/", studentController.getAllStudent);
 studentRouter.delete("/:id", studentController.deleteStudent);
+studentRouter.patch("/:id", studentController.updateStudent);
 
 export default studentRouter;

@@ -3,7 +3,8 @@ import DB from "../models/index.cjs";
 import registerService from "./authService/registerService.js";
 const createStudent = async (data) => {
   // const user = await DB.User.create({});
-  const { email, passWord, userName, mssv, class_id, gender } = data;
+  const { email, passWord, userName, mssv, class_id, gender, phone, address } =
+    data;
   const currentYear = new Date().getFullYear();
   const isConstainClass = await DB.StudentClass.findByPk(class_id);
 
@@ -18,6 +19,15 @@ const createStudent = async (data) => {
     throw new Error("Mssv đã tồn tại");
   }
 
+  let gender_db;
+
+  // sẽ lỗi nếu code bằng typescript
+  if (gender == "Nam") {
+    gender_db = 1;
+  } else {
+    gender_db = 0;
+  }
+
   const user = await registerService({
     email,
     passWord,
@@ -26,15 +36,22 @@ const createStudent = async (data) => {
   });
 
   let student;
-
+  let data_create = {};
   if (user) {
-    student = await DB.Student.create({
-      user_id: user.id,
-      mssv,
-      class_id,
-      enroll_year: currentYear,
-      gender,
-    });
+    data_create.user_id = user.id;
+    data_create.mssv = mssv;
+    data_create.class_id = class_id;
+    data_create.enroll_year = currentYear;
+    data_create.gender = gender_db;
+    if (phone != undefined) {
+      data_create.phone = phone;
+    }
+
+    if (address != undefined) {
+      data_create.address = address;
+    }
+
+    student = await DB.Student.create(data_create);
   }
 
   // here / not done / check lại đang lỗi khi test tạo student
@@ -162,9 +179,7 @@ const deleteStudent = async (id) => {
   return resultDelete;
 };
 
-const updateStudent = async (data) => {
-  const { phone, userName, id, address } = data;
-
+const updateStudent = async (id, data, userName) => {
   const student = await DB.Student.findOne({ where: { id } });
 
   if (!student) {
@@ -179,8 +194,10 @@ const updateStudent = async (data) => {
     throw new Error("User không tồn tại");
   }
 
-  await student.update({ phone, address });
-  await user.update({ username: userName });
+  await student.update(data);
+  if (!userName) {
+    await user.update({ username: userName });
+  }
 
   return true;
 };

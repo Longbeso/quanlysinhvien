@@ -2,18 +2,22 @@ import studentService from "../services/studentService.js";
 
 const createStudent = async (req, res) => {
   try {
-    const { email, passWord, role, userName, mssv, class_id, gender } =
-      req.body;
+    const {
+      email,
+      passWord,
+      userName,
+      mssv,
+      class_id,
+      gender,
+      phone,
+      address,
+    } = req.body;
     if (!email) {
       throw new Error("Email không hợp lệ !!!");
     }
 
     if (!passWord) {
       throw new Error("Mật khẩu không hợp lệ !!!");
-    }
-
-    if (!role) {
-      throw new Error("Role không hợp lệ !!!");
     }
 
     if (!userName) {
@@ -27,18 +31,19 @@ const createStudent = async (req, res) => {
     if (!class_id) {
       throw new Error("class_id không hợp lệ !!!");
     }
-    if (!gender) {
+    if (!gender || (gender != "Nam" && gender != "Nu")) {
       throw new Error("gender không hợp lệ !!!");
     }
 
     const student = await studentService.createStudent({
       email,
       passWord,
-      role,
       userName,
       mssv,
       class_id,
       gender,
+      phone,
+      address,
     });
 
     res.status(200).json({ Success: true, dt: student });
@@ -106,8 +111,6 @@ const updateStudent = async (req, res) => {
       throw new Error("id không hợp lệ");
     }
 
-    data.id = id;
-
     if (phone) {
       const phoneRegex = /^0\d{9}$/;
       const isValidPhone = phoneRegex.test(phone);
@@ -117,13 +120,10 @@ const updateStudent = async (req, res) => {
       data.phone = phone;
     }
 
-    if (userName) {
-      data.userName = userName;
-    }
     if (address) {
       data.address = address;
     }
-    const updateResult = await lecturerService.updateLecturer(data);
+    const updateResult = await studentService.updateStudent(id, data, userName);
     res.status(200).json({ Success: updateResult, MS: "Cập nhật thành công" });
   } catch (err) {
     res.status(400).json({ Success: false, MS: err.message });
